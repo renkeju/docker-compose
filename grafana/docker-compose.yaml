@@ -1,0 +1,27 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    restart: on-failure
+    network_mode: host
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: on-failure
+    network_mode: host
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: password
+
+
+volumes:
+  postgresql-data:
+  grafana-data:
